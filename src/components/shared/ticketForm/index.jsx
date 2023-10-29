@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Input, Button, Ticket } from "../index";
 import * as htmlToImage from "html-to-image";
 import download from "downloadjs";
+import { handleStoreGuest } from "../../../database/firebase";
 
 function TicketForm({ date }) {
   const [name, setName] = useState("XXXXX");
@@ -36,15 +37,21 @@ function TicketForm({ date }) {
     setTickets(value);
   };
 
-  const handleDownloadImage = () => {
-    htmlToImage
-      .toPng(ticketRef.current)
-      .then((dataUrl) => {
-        download(dataUrl, `ticket${name}${lastName}.png`);
-      })
-      .catch((error) => {
-        console.error("Error al generar la imagen:", error);
-      });
+  const handleCreateInvite = () => {
+    handleStoreGuest({ name, lastName, dni, email, tickets, date });
+
+    for (let i = 0; i < tickets; i++) {
+      // Generar una imagen para el ticket actual
+      htmlToImage
+        .toPng(ticketRef.current)
+        .then((dataUrl) => {
+          // Descargar la imagen con un nombre único
+          download(dataUrl, `ticket${name}${lastName}_${i + 1}.png`);
+        })
+        .catch((error) => {
+          console.error("Error al generar la imagen:", error);
+        });
+    }
   };
 
   return (
@@ -87,7 +94,7 @@ function TicketForm({ date }) {
           onChange={handleGuestTickets}
         />
         <div>
-          <Button name={"Enviar invitación"} onClick={handleDownloadImage} />
+          <Button name={"Generar ticket"} onClick={handleCreateInvite} />
         </div>
       </div>
       <div ref={ticketRef}>

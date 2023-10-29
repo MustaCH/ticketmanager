@@ -1,6 +1,6 @@
 import React from "react";
-import { Html } from "@react-email/html";
-import { Head } from "@react-email/head";
+//import { Html } from "@react-email/html";
+//import { Head } from "@react-email/head";
 import { Section } from "@react-email/section";
 import { Container } from "@react-email/container";
 import { Img } from "@react-email/img";
@@ -9,10 +9,7 @@ import QRCode from "react-qr-code";
 
 function Ticket({ name, lastName, dni, tickets, date }) {
   return (
-    <Html>
-      <Head>
-        <title>Subsuelo 808 - 24 de Noviembre</title>
-      </Head>
+    <>
       <Section className="w-96">
         <Container
           style={{
@@ -46,14 +43,14 @@ function Ticket({ name, lastName, dni, tickets, date }) {
               value={`DNI: ${dni} - Nombre: ${name} ${lastName} - Entradas: ${tickets}`}
             />
           </Container>
-          <Text style={{ fontSize: "1rem" }}>Entradas: {tickets}</Text>
+
           <Text style={{ fontSize: "1.2rem,", fontWeight: "bold" }}>
             Valido hasta: {date}
           </Text>
           <Text style={{ fontSize: "0.8rem," }}>Niceto vega 5198 - Miloca</Text>
         </Container>
       </Section>
-    </Html>
+    </>
   );
 }
 

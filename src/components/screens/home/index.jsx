@@ -5,7 +5,7 @@ function Home() {
   const [eventDate, setEventDate] = useState("24/11/2023");
 
   return (
-    <div className=" flex flex-col gap-8">
+    <div className=" flex flex-col gap-8 py-8">
       <header className="flex flex-col justify-center items-center p-4">
         <img
           className="w-1/2 lg:w-1/4"
@@ -15,7 +15,7 @@ function Home() {
         />
       </header>
       <main className="flex flex-col-reverse gap-24 justify-evenly">
-        <Search />
+        {/*<Search />*/}
         <TicketForm date={eventDate} />
       </main>
     </div>
