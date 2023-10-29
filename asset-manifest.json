@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ticketmanager/static/css/main.2c34f746.css",
+    "main.js": "/ticketmanager/static/js/main.8a64e2f0.js",
+    "static/js/651.5a330c64.chunk.js": "/ticketmanager/static/js/651.5a330c64.chunk.js",
+    "index.html": "/ticketmanager/index.html",
+    "main.2c34f746.css.map": "/ticketmanager/static/css/main.2c34f746.css.map",
+    "main.8a64e2f0.js.map": "/ticketmanager/static/js/main.8a64e2f0.js.map",
+    "651.5a330c64.chunk.js.map": "/ticketmanager/static/js/651.5a330c64.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2c34f746.css",
+    "static/js/main.8a64e2f0.js"
+  ]
+}
