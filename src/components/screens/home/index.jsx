@@ -23,7 +23,7 @@ function Home() {
     <div className=" flex flex-col gap-8 py-8">
       <header className="flex flex-col justify-center items-center p-4">
         <img
-          className="w-1/2 lg:w-1/4"
+          className="w-1/2 lg:w-56"
           src="https://i.ibb.co/rH6fG0Y/SBS808-LOGOcomp-RED.png"
           alt="SBS808-LOGO"
           border="0"

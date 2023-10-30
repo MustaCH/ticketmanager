@@ -55,56 +55,61 @@ function TicketForm({ date }) {
   };
 
   return (
-    <section className="text-gray-300 flex flex-col lg:flex-row-reverse justify-center w-full gap-8 lg:gap-24">
-      <div className="flex flex-col items-center gap-4">
-        <h2 className="text-xl text-center font-bold">Añadir invitado</h2>
-        <Input
-          label={"Nombre"}
-          labelFor={"firstname"}
-          name={"firstname"}
-          type={"text"}
-          onChange={handleGuestName}
-        />
-        <Input
-          label={"Apellido"}
-          labelFor={"lastname"}
-          name={"lastname"}
-          type={"text"}
-          onChange={handleGuestLastname}
-        />
-        <Input
-          label={"DNI"}
-          labelFor={"dni"}
-          name={"dni"}
-          type={"text"}
-          onChange={handleGuestDni}
-        />
-        <Input
-          label={"Email"}
-          labelFor={"email"}
-          name={"email"}
-          type={"text"}
-          onChange={handleGuestEmail}
-        />
-        <Input
-          label={"Entradas"}
-          labelFor={"tickets"}
-          name={"tickets"}
-          type={"number"}
-          onChange={handleGuestTickets}
-        />
-        <div>
-          <Button name={"Generar ticket"} onClick={handleCreateInvite} />
+    <section>
+      <div className="text-gray-300 flex flex-col lg:flex-row-reverse justify-center w-full gap-8 lg:gap-24">
+        <div className="flex flex-col items-start gap-4 ps-8 lg:ps-0">
+          <Input
+            label={"Nombre"}
+            labelFor={"firstname"}
+            name={"firstname"}
+            type={"text"}
+            onChange={handleGuestName}
+            customStyle={"w-80"}
+          />
+          <Input
+            label={"Apellido"}
+            labelFor={"lastname"}
+            name={"lastname"}
+            type={"text"}
+            onChange={handleGuestLastname}
+            customStyle={"w-80"}
+          />
+          <Input
+            label={"DNI"}
+            labelFor={"dni"}
+            name={"dni"}
+            type={"text"}
+            onChange={handleGuestDni}
+            customStyle={"w-80"}
+          />
+          <Input
+            label={"Email"}
+            labelFor={"email"}
+            name={"email"}
+            type={"text"}
+            onChange={handleGuestEmail}
+            customStyle={"w-80"}
+          />
+          <Input
+            label={"Entradas"}
+            labelFor={"tickets"}
+            name={"tickets"}
+            type={"number"}
+            onChange={handleGuestTickets}
+          />
+          <div className="mt-8">
+            <Button name={"Generar tickets"} onClick={handleCreateInvite} />
+          </div>
         </div>
-      </div>
-      <div ref={ticketRef}>
-        <Ticket
-          name={name}
-          lastName={lastName}
-          dni={dni}
-          tickets={tickets}
-          date={date}
-        />
+        <div ref={ticketRef}>
+          <Ticket
+            name={name}
+            lastName={lastName}
+            dni={dni}
+            tickets={tickets}
+            date={date}
+          />
+        </div>
       </div>
     </section>
   );
