@@ -1,6 +1,14 @@
 import { initializeApp } from "firebase/app";
 import "firebase/firestore";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDb6_cvgO0yiNr7LznDjjz3MoD71sIX870",
@@ -39,4 +47,20 @@ export const handleStoreGuest = async ({
   } catch (error) {
     console.error("Error al almacenar el cliente: ", error);
   }
+};
+
+export async function getGuests() {
+  const guestsRef = collection(db, "guests");
+  let q;
+  q = query(guestsRef);
+  const snapshot = await getDocs(q);
+  const guests = snapshot.docs.map((item) => ({
+    ...item.data(),
+    id: item.id,
+  }));
+  return guests;
+}
+
+export const deleteGuest = async (guestId) => {
+  await deleteDoc(doc(db, "guests", guestId));
 };

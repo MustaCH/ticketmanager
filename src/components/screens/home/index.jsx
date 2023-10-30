@@ -1,8 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Search, TicketForm } from "../../shared";
+import { getGuests } from "../../../database/firebase";
 
 function Home() {
-  const [eventDate, setEventDate] = useState("24/11/2023");
+  const eventDate = "24/11/2023";
+  const [guests, setGuests] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const getGuestsData = await getGuests();
+        setGuests(getGuestsData);
+      } catch (error) {
+        console.error("Error al obtener invitados:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className=" flex flex-col gap-8 py-8">
@@ -15,7 +30,7 @@ function Home() {
         />
       </header>
       <main className="flex flex-col-reverse gap-24 justify-evenly">
-        {/*<Search />*/}
+        <Search placeholder={"Buscar invitados"} data={guests} />
         <TicketForm date={eventDate} />
       </main>
     </div>
