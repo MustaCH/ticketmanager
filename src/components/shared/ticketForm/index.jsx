@@ -41,11 +41,9 @@ function TicketForm({ date }) {
     handleStoreGuest({ name, lastName, dni, email, tickets, date });
 
     for (let i = 0; i < tickets; i++) {
-      // Generar una imagen para el ticket actual
       htmlToImage
         .toPng(ticketRef.current)
         .then((dataUrl) => {
-          // Descargar la imagen con un nombre único
           download(dataUrl, `ticket${name}${lastName}_${i + 1}.png`);
         })
         .catch((error) => {
