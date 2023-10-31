@@ -47,7 +47,7 @@ function Home() {
 
   const handleEventDeletion = () => {
     const confirmFirstAlert = window.confirm(
-      "¿Estás seguro de que deseas eliminar el evento?"
+      "¿Estás seguro de que deseas finalizar el evento?"
     );
     if (confirmFirstAlert) {
       const confirmSecondAlert = window.confirm(
