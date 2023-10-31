@@ -68,15 +68,15 @@ function Login({ onLoginSuccess }) {
           onChange={(e) => setPass(e.target.value)}
         />
         <Button name={"Iniciar Sesión"} onClick={handleCheckUser} />
-
-        <Input
-          type={"checkbox"}
-          label={"Mantener sesión abierta"}
-          labelFor={"remember"}
-          name={"remember"}
-          checked={rememberMe}
-          onChange={handleRememberMeChange}
-        />
+        <div className="flex flex-row-reverse gap-2 items-center">
+          <label htmlFor={"remember"}>Mantener sesión abierta</label>
+          <input
+            type={"checkbox"}
+            name={"remember"}
+            checked={rememberMe}
+            onChange={handleRememberMeChange}
+          />
+        </div>
 
         {error && <p className="text-red-500">{error}</p>}
       </div>

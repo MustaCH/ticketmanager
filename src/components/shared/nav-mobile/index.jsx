@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoStatsChart } from "react-icons/io5";
 import { GoChecklist } from "react-icons/go";
 import { AiOutlineQrcode } from "react-icons/ai";
+import { RiLogoutBoxLine } from "react-icons/ri";
 import { NavLink, useLocation } from "react-router-dom";
 
 function NavMobile() {
@@ -11,6 +12,13 @@ function NavMobile() {
   useEffect(() => {
     setActivePage(location.pathname);
   }, [location]);
+
+  const handleLogout = () => {
+    if (window.confirm("¿Estás seguro que deseas cerrar sesión?")) {
+      localStorage.clear();
+      window.location.reload();
+    }
+  };
 
   return (
     <div className="relative z-50">
@@ -42,6 +50,11 @@ function NavMobile() {
             <IoStatsChart />
           </button>
         </NavLink>
+        <div>
+          <button>
+            <RiLogoutBoxLine onClick={handleLogout} />
+          </button>
+        </div>
       </nav>
     </div>
   );
