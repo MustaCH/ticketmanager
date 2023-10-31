@@ -37,7 +37,6 @@
     "react-qr-code": "^2.0.12",
     "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
-    "resend": "^1.1.0",
     "smtpjs": "^0.0.1",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",

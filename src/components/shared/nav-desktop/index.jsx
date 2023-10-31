@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoStatsChart } from "react-icons/io5";
 import { GoChecklist } from "react-icons/go";
 import { AiOutlineQrcode } from "react-icons/ai";
+import { RiLogoutBoxLine } from "react-icons/ri";
 import { NavLink, useLocation } from "react-router-dom";
 
 const NavDesktop = () => {
@@ -11,6 +12,13 @@ const NavDesktop = () => {
   useEffect(() => {
     setActivePage(location.pathname);
   }, [location]);
+
+  const handleLogout = () => {
+    if (window.confirm("¿Estás seguro que deseas cerrar sesión?")) {
+      localStorage.clear();
+      window.location.reload();
+    }
+  };
 
   return (
     <nav className="hidden bg-neutral-800 fixed left-0 top-0 w-28 h-full lg:flex flex-col justify-between py-6 rounded-tr-xl rounded-br-xl">
@@ -76,6 +84,12 @@ const NavDesktop = () => {
             </NavLink>
           </li>
         </ul>
+      </div>
+      <div className="p-4 flex justify-center rounded-xl text-red-600">
+        <RiLogoutBoxLine
+          className="text-2xl cursor-pointer"
+          onClick={handleLogout}
+        />
       </div>
     </nav>
   );
