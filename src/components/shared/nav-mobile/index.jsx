@@ -41,10 +41,10 @@ function NavMobile() {
             <GoChecklist />
           </button>
         </NavLink>
-        <NavLink to={"/chat"}>
+        <NavLink to={"/stats"}>
           <button
             className={
-              activePage === "/chat" ? `text-red-600` : `text-gray-400`
+              activePage === "/stats" ? `text-red-600` : `text-gray-400`
             }
           >
             <IoStatsChart />
