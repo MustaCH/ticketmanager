@@ -70,16 +70,11 @@ export const deleteGuest = async (guestId) => {
 
 export async function deleteAllGuests() {
   const guestsRef = collection(db, "guests");
-
   try {
-    // Obtén todos los documentos de la colección "guests".
     const querySnapshot = await getDocs(guestsRef);
-
-    // Itera a través de los documentos y elimínalos uno por uno.
     querySnapshot.forEach(async (doc) => {
       await deleteDoc(doc.ref);
     });
-
     console.log("Todos los documentos de la colección 'guests' eliminados");
   } catch (error) {
     console.error(
@@ -107,7 +102,7 @@ export async function getAdmins(username, password) {
   }
 }
 
-export async function createEvent(date, location) {
+export async function createEvent(date, location, link) {
   try {
     const eventsRef = collection(db, "events");
     const mainEventRef = doc(eventsRef, "main-event");
@@ -115,6 +110,7 @@ export async function createEvent(date, location) {
     const newEvent = {
       date: date,
       location: location,
+      link: link, // Añade el enlace al objeto del evento.
     };
 
     await setDoc(mainEventRef, newEvent);

@@ -12,6 +12,7 @@ function Home() {
   const eventData = { date: "", location: "" };
   const [eventDate, setEventDate] = useState("");
   const [eventLocation, setEventLocation] = useState("");
+  const [paymentLink, setPaymentLink] = useState("");
   const [showEventForm, setShowEventForm] = useState(true);
   const [existingEvent, setExistingEvent] = useState(null);
 
@@ -33,11 +34,12 @@ function Home() {
     checkExistingEvent();
   }, []);
 
-  const handleEventCreation = async (date, location) => {
+  const handleEventCreation = async (date, location, link) => {
     try {
-      await createEvent(date, location);
+      await createEvent(date, location, link);
       setEventDate(date);
       setEventLocation(location);
+      setPaymentLink(link);
       setShowEventForm(false);
       window.location.reload();
     } catch (error) {
@@ -92,9 +94,16 @@ function Home() {
                 type={"text"}
                 onChange={(e) => setEventLocation(e.target.value)}
               />
+              <Input
+                label={"Link de pago"}
+                type={"text"}
+                onChange={(e) => setPaymentLink(e.target.value)}
+              />
               <Button
                 name={"Crear evento"}
-                onClick={() => handleEventCreation(eventDate, eventLocation)}
+                onClick={() =>
+                  handleEventCreation(eventDate, eventLocation, paymentLink)
+                }
               />
             </div>
           </div>
