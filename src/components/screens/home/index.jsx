@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Input, TicketForm } from "../../shared";
 import { TbTrashXFilled } from "react-icons/tb";
-import { createEvent, deleteEvent, getEvent } from "../../../database/firebase";
+import {
+  createEvent,
+  deleteAllGuests,
+  deleteEvent,
+  getEvent,
+} from "../../../database/firebase";
 
 function Home() {
   const eventData = { date: "", location: "" };
@@ -52,6 +57,7 @@ function Home() {
         deleteEvent();
         setExistingEvent(null);
         setShowEventForm(true);
+        deleteAllGuests();
       }
     }
   };
@@ -60,7 +66,7 @@ function Home() {
     <div className="flex flex-col gap-8 py-8 pb-24 lg:pb-0 min-h-screen">
       <section className="lg:ps-24 text-white flex justify-center">
         {existingEvent ? (
-          <div className="flex justify-center items-center gap-4 text-sm">
+          <div className="flex justify-center items-center gap-2 lg:gap-4 text-sm">
             <p className="text-red-500">
               <span className="font-bold text-white pe-2">Evento actual:</span>{" "}
               {existingEvent.date} - {existingEvent.location}

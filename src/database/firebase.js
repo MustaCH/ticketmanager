@@ -68,6 +68,28 @@ export const deleteGuest = async (guestId) => {
   await deleteDoc(doc(db, "guests", guestId));
 };
 
+export async function deleteAllGuests() {
+  const guestsRef = collection(db, "guests");
+
+  try {
+    // Obtén todos los documentos de la colección "guests".
+    const querySnapshot = await getDocs(guestsRef);
+
+    // Itera a través de los documentos y elimínalos uno por uno.
+    querySnapshot.forEach(async (doc) => {
+      await deleteDoc(doc.ref);
+    });
+
+    console.log("Todos los documentos de la colección 'guests' eliminados");
+  } catch (error) {
+    console.error(
+      "Error al eliminar los documentos de la colección 'guests': ",
+      error
+    );
+    throw error;
+  }
+}
+
 export async function getAdmins(username, password) {
   const adminsRef = collection(db, "admins");
   const q = query(
