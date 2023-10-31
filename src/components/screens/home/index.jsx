@@ -1,36 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Search, TicketForm } from "../../shared";
-import { getGuests } from "../../../database/firebase";
+import React from "react";
+import { TicketForm } from "../../shared";
 
 function Home() {
   const eventDate = "24/11/2023";
-  const [guests, setGuests] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const getGuestsData = await getGuests();
-        setGuests(getGuestsData);
-      } catch (error) {
-        console.error("Error al obtener invitados:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
-    <div className=" flex flex-col gap-8 py-8">
+    <div className="flex flex-col gap-8 py-8 pb-24 lg:pb-12 min-h-screen">
       <header className="flex flex-col justify-center items-center p-4">
-        <img
-          className="w-1/2 lg:w-56"
-          src="https://i.ibb.co/rH6fG0Y/SBS808-LOGOcomp-RED.png"
-          alt="SBS808-LOGO"
-          border="0"
-        />
+        <h1 className="text-2xl font-bold text-white mb-8 uppercase">
+          Ticket Manager
+        </h1>
       </header>
       <main className="flex flex-col-reverse gap-24 justify-evenly">
-        <Search placeholder={"Buscar invitados"} data={guests} />
         <TicketForm date={eventDate} />
       </main>
     </div>

@@ -10,7 +10,7 @@ import QRCode from "react-qr-code";
 function Ticket({ name, lastName, dni, tickets, date }) {
   return (
     <>
-      <Section className="w-96">
+      <Section className="w-[380px]">
         <Container
           style={{
             display: "grid",

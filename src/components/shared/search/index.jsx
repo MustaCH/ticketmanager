@@ -27,8 +27,10 @@ function Search({ placeholder, data }) {
   });
 
   return (
-    <section className="w-full flex flex-col items-center">
-      <h2 className="text-2xl text-white font-bold mb-8">Lista de invitados</h2>
+    <section className="w-full flex flex-col items-center pb-24">
+      <h2 className="text-2xl text-white font-bold mb-8 mt-8 uppercase">
+        Lista de invitados
+      </h2>
       <form className="relative w-full lg:w-1/2 group">
         <div className="w-full relative z-10">
           <RiSearchLine className="absolute left-3 top-1/2 -translate-y-1/2 text-red-600" />
@@ -40,13 +42,13 @@ function Search({ placeholder, data }) {
             className="bg-white w-full py-2 pl-10 pr-4 rounded-tr-lg rounded-tl-lg text-black outline-none border-2 border-transparent focus:border-red-500"
           />
         </div>
-        <ul className="flex flex-col rounded-bl-lg rounded-br-lg justify-start w-full z-50 bg-zinc-800 p-1 px-2 lg:p-5 shadow-2xl max-h-96 min-h-fit overflow-auto">
+        <ul className="flex flex-col rounded-bl-lg rounded-br-lg justify-start w-full z-50 bg-zinc-800 p-1 px-2 lg:p-5 shadow-2xl   overflow-auto">
           {filteredData.map((value, key) => (
             <div
               key={key}
-              className="flex justify-between items-center gap-4 text-white p-1 lg:p-4 my-1 bg-zinc-900 border border-transparent rounded-lg hover:border-white  duration-150"
+              className="flex justify-between items-center px-6 py-4 gap-4 text-white p-1 lg:p-4 my-1 bg-zinc-900 border border-transparent rounded-lg hover:border-white  duration-150"
             >
-              <div className="flex gap-4">
+              <div className="flex flex-col lg:flex-row  gap-2 lg:gap-4">
                 <p className="text-red-500 capitalize ">
                   Nombre:{" "}
                   <span className="text-white">
