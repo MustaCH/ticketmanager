@@ -20,7 +20,7 @@ function App() {
   };
 
   return (
-    <div className="bg-neutral-900  lg:px-12 lg:pb-12 ">
+    <div className="bg-gradient-to-br from-neutral-900 via-neutral-800 to-red-900 lg:px-12">
       {validUser === true ? (
         <Router>
           <NavMobile />

@@ -33,13 +33,7 @@ const NavDesktop = () => {
               />
             </div>
           </NavLink>
-          <li
-            className={` p-4 rounded-tl-xl rounded-bl-xl ${
-              activePage === "/ticketmanager"
-                ? "bg-neutral-900"
-                : "bg-neutral-800 "
-            }`}
-          >
+          <li className="p-4 rounded-tl-xl rounded-bl-xl bg-neutral-800">
             <NavLink
               to="/ticketmanager"
               className={` p-4 flex justify-center rounded-xl ${
@@ -51,11 +45,7 @@ const NavDesktop = () => {
               <AiOutlineQrcode className="text-2xl" />
             </NavLink>
           </li>
-          <li
-            className={` p-4 rounded-tl-xl rounded-bl-xl ${
-              activePage === "/guestList" ? "bg-neutral-900" : "bg-neutral-800 "
-            }`}
-          >
+          <li className="p-4 rounded-tl-xl rounded-bl-xl bg-neutral-800">
             <NavLink
               to="./guestList"
               className={` p-4 flex justify-center rounded-xl ${
@@ -67,11 +57,7 @@ const NavDesktop = () => {
               <GoChecklist className="text-2xl" />
             </NavLink>
           </li>
-          <li
-            className={` p-4 rounded-tl-xl rounded-bl-xl ${
-              activePage === "/stats" ? "bg-neutral-900" : "bg-neutral-800 "
-            }`}
-          >
+          <li className="p-4 rounded-tl-xl rounded-bl-xl bg-neutral-800">
             <NavLink
               to="./stats"
               className={` p-4 flex justify-center rounded-xl ${

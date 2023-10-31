@@ -57,7 +57,7 @@ function Home() {
   };
 
   return (
-    <div className="flex flex-col gap-8 py-8 pb-24 lg:pb-12 min-h-screen">
+    <div className="flex flex-col gap-8 py-8 pb-24 lg:pb-0 min-h-screen">
       <section className="lg:ps-24 text-white flex justify-center">
         {existingEvent ? (
           <div className="flex justify-center items-center gap-4 text-sm">

@@ -19,7 +19,7 @@ function List() {
   }, []);
 
   return (
-    <div className="bg-neutral-900  lg:px-12 lg:pb-12 min-h-screen">
+    <div className=" lg:ps-24 lg:pb-12 min-h-screen">
       {" "}
       <Search placeholder={"Buscar invitados"} data={guests} />
     </div>
