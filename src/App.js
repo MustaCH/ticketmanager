@@ -8,7 +8,6 @@ function App() {
   const [validUser, setValidUser] = useState(false);
 
   useEffect(() => {
-    // Cuando el componente se monta, verifica si el usuario tenía una sesión válida anteriormente y restaura el estado si es necesario.
     const validUserValue = localStorage.getItem("validUser");
     if (validUserValue === "true") {
       setValidUser(true);
@@ -17,7 +16,6 @@ function App() {
 
   const handleLoginSuccess = () => {
     setValidUser(true);
-    // Guarda el estado de sesión válida en localStorage.
     localStorage.setItem("validUser", "true");
   };
 

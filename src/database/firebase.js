@@ -8,6 +8,9 @@ import {
   query,
   deleteDoc,
   doc,
+  where,
+  getDoc,
+  setDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -64,3 +67,70 @@ export async function getGuests() {
 export const deleteGuest = async (guestId) => {
   await deleteDoc(doc(db, "guests", guestId));
 };
+
+export async function getAdmins(username, password) {
+  const adminsRef = collection(db, "admins");
+  const q = query(
+    adminsRef,
+    where("user", "==", username),
+    where("pass", "==", password)
+  );
+  const snapshot = await getDocs(q);
+
+  if (snapshot.docs.length === 1) {
+    const admin = snapshot.docs[0].data();
+    return { id: snapshot.docs[0].id, ...admin };
+  } else {
+    return null;
+  }
+}
+
+export async function createEvent(date, location) {
+  try {
+    const eventsRef = collection(db, "events");
+    const mainEventRef = doc(eventsRef, "main-event");
+
+    const newEvent = {
+      date: date,
+      location: location,
+    };
+
+    await setDoc(mainEventRef, newEvent);
+
+    console.log("Evento creado con ID 'main-event'");
+  } catch (error) {
+    console.error("Error al crear el evento: ", error);
+    throw error;
+  }
+}
+
+export async function getEvent() {
+  try {
+    const eventRef = doc(db, "events", "main-event"); // Asegúrate de usar el mismo ID que usaste al crear el evento.
+
+    const eventSnapshot = await getDoc(eventRef);
+
+    if (eventSnapshot.exists()) {
+      const eventData = eventSnapshot.data();
+      return eventData;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("Error al obtener el evento: ", error);
+    throw error;
+  }
+}
+
+export async function deleteEvent() {
+  try {
+    const eventRef = doc(db, "events", "main-event");
+
+    await deleteDoc(eventRef);
+
+    console.log("Evento 'main-event' eliminado");
+  } catch (error) {
+    console.error("Error al eliminar el evento: ", error);
+    throw error;
+  }
+}

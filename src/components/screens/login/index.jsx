@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Button, Input } from "../../shared";
+import { getAdmins } from "../../../database/firebase";
 
 function Login({ onLoginSuccess }) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
-
-  const validUsers = {
-    Masto123: "Sbs808123",
-    Rivas245: "Sbs808245",
-    Emi678: "Sbs808678",
-  };
 
   useEffect(() => {
     const rememberMeValue = localStorage.getItem("rememberMe");
@@ -24,16 +19,23 @@ function Login({ onLoginSuccess }) {
     }
   }, []);
 
-  const handleCheckUser = () => {
-    if (validUsers[user] === pass) {
-      setError("");
-      if (rememberMe) {
-        localStorage.setItem("user", user);
+  const handleCheckUser = async () => {
+    try {
+      console.log("Usuario:", user);
+      console.log("Contraseña:", pass);
+      const admin = await getAdmins(user, pass);
+      if (admin) {
+        if (rememberMe) {
+          localStorage.setItem("user", user);
+        } else {
+          localStorage.removeItem("user");
+        }
+        onLoginSuccess(admin);
+      } else {
+        setError("Credenciales incorrectas. Por favor, intenta nuevamente.");
       }
-      onLoginSuccess();
-      localStorage.setItem("validUser", "true");
-    } else {
-      setError("Usuario o contraseña no válidos");
+    } catch (error) {
+      setError("Error al iniciar sesión. Por favor, intenta nuevamente.");
     }
   };
 

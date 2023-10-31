@@ -4,7 +4,7 @@ import * as htmlToImage from "html-to-image";
 import download from "downloadjs";
 import { handleStoreGuest } from "../../../database/firebase";
 
-function TicketForm({ date }) {
+function TicketForm({ date, location }) {
   const [name, setName] = useState("XXXXX");
   const [lastName, setLastName] = useState("");
   const [dni, setDni] = useState("XXXXX");
@@ -106,6 +106,7 @@ function TicketForm({ date }) {
             dni={dni}
             tickets={tickets}
             date={date}
+            location={location}
           />
         </div>
       </div>

@@ -7,7 +7,7 @@ import { Img } from "@react-email/img";
 import { Text } from "@react-email/text";
 import QRCode from "react-qr-code";
 
-function Ticket({ name, lastName, dni, tickets, date }) {
+function Ticket({ name, lastName, dni, tickets, date, location }) {
   return (
     <>
       <Section className="w-[380px]">
@@ -47,7 +47,7 @@ function Ticket({ name, lastName, dni, tickets, date }) {
           <Text style={{ fontSize: "1.2rem,", fontWeight: "bold" }}>
             Valido hasta: {date}
           </Text>
-          <Text style={{ fontSize: "0.8rem," }}>Niceto vega 5198 - Miloca</Text>
+          <Text style={{ fontSize: "0.8rem," }}>{location}</Text>
         </Container>
       </Section>
     </>
