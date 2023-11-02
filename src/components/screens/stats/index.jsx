@@ -1,28 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  AiOutlinePlusCircle,
-  AiOutlineEdit,
-  AiOutlineCloseCircle,
-  AiOutlineUnorderedList,
-} from "react-icons/ai";
-import { Link } from "react-router-dom";
-import { deleteAllGuests, deleteEvent } from "../../../database/firebase";
+  Admins,
+  CurrentEvent,
+  TicketValue,
+  TicketSell,
+} from "./components/index";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { Button, Input } from "../../shared";
 
 function Stats() {
-  const handleEventDeletion = () => {
-    const confirmFirstAlert = window.confirm(
-      "¿Estás seguro de que deseas finalizar el evento?"
-    );
-    if (confirmFirstAlert) {
-      const confirmSecondAlert = window.confirm(
-        "¡Esta acción no se puede deshacer! ¿Estás absolutamente seguro?"
-      );
-      if (confirmSecondAlert) {
-        deleteEvent();
-        deleteAllGuests();
-      }
-    }
-  };
+  const [editAdmin, setEditAdmin] = useState(false);
+  const [newAdmin, setNewAdmin] = useState(false);
 
   return (
     <div className="lg:ps-24 min-h-screen flex flex-col gap-12">
@@ -31,118 +19,55 @@ function Stats() {
       </h1>
       <div className="grid pb-24 mt-12 place-items-center">
         <div className="self-center align-center grid grid-cols-1 lg:grid-cols-4 place-items-center gap-2 items-center">
-          <section className="bg-neutral-900/30 backdrop-blur-xl rounded-lg w-72 h-96">
-            <div className="px-6 pt-6">
-              <h2 className="text-xl font-bold text-white text-center">
-                Administradores
-              </h2>
-              <ul className="flex flex-col gap-2 my-4 text-white text-lg">
-                <li className="grid grid-cols-2 items-center gap-8">
-                  Masto
-                  <span className="flex justify-end">
-                    <AiOutlineEdit className="text-gray-400 cursor-pointer" />
-                  </span>
-                </li>
-                <li className="grid grid-cols-2  items-center gap-8">
-                  Rivas
-                  <span className="flex justify-end">
-                    <AiOutlineEdit className="text-gray-400 cursor-pointer" />
-                  </span>
-                </li>
-                <li className="grid grid-cols-2  items-center gap-8">
-                  Emi
-                  <span className="flex justify-end">
-                    <AiOutlineEdit className="text-gray-400 cursor-pointer" />
-                  </span>
-                </li>
-              </ul>
-            </div>
-            <div className="group fixed bottom-0 w-full flex justify-center bg-neutral-500 hover:bg-neutral-900 duration-150 py-2 rounded-br-lg rounded-bl-lg">
-              <button className="flex flex-col items-center font-bold text-gray-300 group-hover:text-red-500 duration-150">
-                Añadir nuevo <AiOutlinePlusCircle className="text-2xl" />
-              </button>
-            </div>
-          </section>
-          <section className="bg-neutral-900/30 backdrop-blur-xl rounded-lg w-72 h-96">
-            <div className="px-6 pt-6 h-96">
-              <h2 className="text-xl font-bold text-white text-center">
-                Evento actual
-              </h2>
-              <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
-                <p className="flex justify-between items-center">
-                  Fecha:{" "}
-                  <AiOutlineEdit className="text-gray-400 text-lg cursor-pointer" />
-                </p>
-                <span className="flex items-center justify-between font-normal text-base">
-                  24/11/2023
-                </span>
-              </div>
-              <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
-                <p className="flex justify-between items-center">
-                  Locación:{" "}
-                  <AiOutlineEdit className="text-gray-400 text-lg cursor-pointer" />
-                </p>
-
-                <span className="flex items-center justify-between font-normal text-base">
-                  Niceto Vega 5198 - Miloca
-                </span>
-              </div>
-              <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
-                <p className="flex justify-between items-center">
-                  Link de pago:{" "}
-                  <AiOutlineEdit className="text-gray-400 text-lg cursor-pointer" />
-                </p>
-                <span className="flex items-center justify-between font-normal text-base truncate ">
-                  https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js
-                </span>
-              </div>
-            </div>
-            <div className="group fixed bottom-0 w-full flex justify-center bg-red-800 hover:bg-neutral-900 duration-150 py-2 rounded-br-lg rounded-bl-lg">
-              <button
-                onClick={handleEventDeletion}
-                className="flex flex-col items-center font-bold text-gray-300 group-hover:text-red-500 duration-150"
-              >
-                Finalizar evento <AiOutlineCloseCircle className="text-2xl" />
-              </button>
-            </div>
-          </section>
-          <section className="bg-neutral-900/30 backdrop-blur-xl rounded-lg w-72 h-96">
-            <div className="flex flex-col gap-16 px-6 pt-6">
-              <h2 className="text-xl font-bold text-white text-center">
-                Valor actual de entrada
-              </h2>
-              <div className="flex flex-col gap-4 items-center justify-center">
-                <p className="text-white text-5xl font-semibold">$2000</p>
-                <p className="text-red-500 text-2xl font-semibold">Preventa</p>
-              </div>
-            </div>
-
-            <div className="group fixed bottom-0 w-full flex justify-center bg-neutral-500 hover:bg-neutral-900 duration-150 py-2 rounded-br-lg rounded-bl-lg">
-              <button className="flex flex-col items-center font-bold text-gray-300 group-hover:text-red-500 duration-150">
-                Modificar <AiOutlineEdit className="text-2xl" />
-              </button>
-            </div>
-          </section>
-          <section className="bg-neutral-900/30 backdrop-blur-xl rounded-lg w-72 h-96">
-            <div className="flex flex-col gap-16 px-6 pt-6">
-              <h2 className="text-xl font-bold text-white text-center">
-                Entradas vendidas
-              </h2>
-              <div className="flex flex-col gap-4 items-center justify-center">
-                <p className="text-white text-5xl font-semibold">150</p>
-                <p className="text-white/80 text-2xl font-semibold">$350000</p>
-              </div>
-            </div>
-            <div className="group fixed bottom-0 w-full flex justify-center bg-neutral-500 hover:bg-neutral-900 duration-150 py-2 rounded-br-lg rounded-bl-lg">
-              <Link
-                to={"/guestList"}
-                className="flex flex-col items-center font-bold text-gray-300 group-hover:text-red-500 duration-150"
-              >
-                Revisar lista <AiOutlineUnorderedList className="text-2xl" />
-              </Link>
-            </div>
-          </section>
+          <Admins
+            editAdmin={() => setEditAdmin(true)}
+            newAdmin={() => setNewAdmin(true)}
+          />
+          <CurrentEvent />
+          <TicketValue />
+          <TicketSell />
         </div>
+        <dialog
+          open={editAdmin}
+          className="absolute z-50 rounded-lg pb-8 pt-4 bg-neutral-900 text-white"
+        >
+          <div className="flex justify-between items-center mb-4 px-4">
+            <h2 className="text-xl font-semibold">Editar usuario:</h2>
+            <AiOutlineCloseCircle
+              className="text-2xl cursor-pointer"
+              onClick={() => setEditAdmin(false)}
+            />
+          </div>
+          <div className="flex flex-col gap-4 px-8">
+            <Input label="Nombre:" />
+            <Input label="Usuario:" />
+            <div className="flex gap-4 flex-row-reverse justify-center">
+              <Button name="Eliminar" />
+              <Button name="Guardar" customStyle={"bg-gray-500"} />
+            </div>
+          </div>
+        </dialog>
+        <dialog
+          open={newAdmin}
+          className="absolute z-50 rounded-lg pb-8 pt-4 bg-neutral-900 text-white"
+        >
+          <div className="flex justify-between items-center mb-4 px-4">
+            <h2 className="text-xl font-semibold">Crear usuario</h2>
+            <AiOutlineCloseCircle
+              className="text-2xl cursor-pointer"
+              onClick={() => setNewAdmin(false)}
+            />
+          </div>
+          <div className="flex flex-col gap-4 px-8">
+            <Input label="Nombre:" />
+            <Input label="Usuario:" />
+            <Input label="Constraseña:" />
+            <div className="flex gap-4 flex-row-reverse justify-center">
+              <Button name="Cancelar" />
+              <Button name="Guardar" customStyle={"bg-gray-500"} />
+            </div>
+          </div>
+        </dialog>
       </div>
     </div>
   );

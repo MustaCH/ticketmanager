@@ -102,6 +102,20 @@ export async function getAdmins(username, password) {
   }
 }
 
+export async function getAdminsData() {
+  const adminsRef = collection(db, "admins");
+  const q = query(adminsRef);
+  const adminsSnapshot = await getDocs(q);
+
+  const adminsData = adminsSnapshot.docs.map((adminDoc) => {
+    const adminData = adminDoc.data();
+    const adminId = adminDoc.id;
+    return { id: adminId, ...adminData };
+  });
+
+  return adminsData;
+}
+
 export async function createEvent(date, location, link) {
   try {
     const eventsRef = collection(db, "events");
@@ -110,7 +124,7 @@ export async function createEvent(date, location, link) {
     const newEvent = {
       date: date,
       location: location,
-      link: link, // Añade el enlace al objeto del evento.
+      link: link,
     };
 
     await setDoc(mainEventRef, newEvent);
@@ -124,7 +138,7 @@ export async function createEvent(date, location, link) {
 
 export async function getEvent() {
   try {
-    const eventRef = doc(db, "events", "main-event"); // Asegúrate de usar el mismo ID que usaste al crear el evento.
+    const eventRef = doc(db, "events", "main-event");
 
     const eventSnapshot = await getDoc(eventRef);
 
