@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Input, TicketForm } from "../../shared";
-import { TbTrashXFilled } from "react-icons/tb";
-import {
-  createEvent,
-  deleteAllGuests,
-  deleteEvent,
-  getEvent,
-} from "../../../database/firebase";
+import { createEvent, getEvent } from "../../../database/firebase";
 
 function Home() {
   const eventData = { date: "", location: "" };
@@ -47,23 +41,6 @@ function Home() {
     }
   };
 
-  const handleEventDeletion = () => {
-    const confirmFirstAlert = window.confirm(
-      "¿Estás seguro de que deseas finalizar el evento?"
-    );
-    if (confirmFirstAlert) {
-      const confirmSecondAlert = window.confirm(
-        "¡Esta acción no se puede deshacer! ¿Estás absolutamente seguro?"
-      );
-      if (confirmSecondAlert) {
-        deleteEvent();
-        setExistingEvent(null);
-        setShowEventForm(true);
-        deleteAllGuests();
-      }
-    }
-  };
-
   return (
     <div className="flex flex-col gap-8 py-8 pb-24 lg:pb-0 min-h-screen">
       <section className="lg:ps-24 text-white flex justify-center">
@@ -73,10 +50,6 @@ function Home() {
               <span className="font-bold text-white pe-2">Evento actual:</span>{" "}
               {existingEvent.date} - {existingEvent.location}
             </p>
-            <TbTrashXFilled
-              className="text-red-500 text-lg cursor-pointer"
-              onClick={handleEventDeletion}
-            />
           </div>
         ) : showEventForm ? (
           <div className="flex flex-col w-1/2 self-center">

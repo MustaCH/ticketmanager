@@ -6,8 +6,24 @@ import {
   AiOutlineUnorderedList,
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { deleteAllGuests, deleteEvent } from "../../../database/firebase";
 
 function Stats() {
+  const handleEventDeletion = () => {
+    const confirmFirstAlert = window.confirm(
+      "¿Estás seguro de que deseas finalizar el evento?"
+    );
+    if (confirmFirstAlert) {
+      const confirmSecondAlert = window.confirm(
+        "¡Esta acción no se puede deshacer! ¿Estás absolutamente seguro?"
+      );
+      if (confirmSecondAlert) {
+        deleteEvent();
+        deleteAllGuests();
+      }
+    }
+  };
+
   return (
     <div className="lg:ps-24 min-h-screen flex flex-col gap-12">
       <h1 className="text-3xl font-bold text-white uppercase text-center mt-12">
@@ -82,7 +98,10 @@ function Stats() {
               </div>
             </div>
             <div className="group fixed bottom-0 w-full flex justify-center bg-red-800 hover:bg-neutral-900 duration-150 py-2 rounded-br-lg rounded-bl-lg">
-              <button className="flex flex-col items-center font-bold text-gray-300 group-hover:text-red-500 duration-150">
+              <button
+                onClick={handleEventDeletion}
+                className="flex flex-col items-center font-bold text-gray-300 group-hover:text-red-500 duration-150"
+              >
                 Finalizar evento <AiOutlineCloseCircle className="text-2xl" />
               </button>
             </div>
