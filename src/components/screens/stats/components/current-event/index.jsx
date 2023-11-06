@@ -67,7 +67,8 @@ function CurrentEvent() {
             <AiOutlineEdit className="text-gray-400 text-lg lg:text-2xl cursor-pointer" />
           </p>
           <span className="flex items-center justify-between font-normal text-base truncate ">
-            $2000
+            $2000{" "}
+            <span className="text-xs text-white/50">Finaliza: 06/11/2023</span>
           </span>
         </div>
         <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
@@ -77,6 +78,7 @@ function CurrentEvent() {
           </p>
           <span className="flex items-center justify-between font-normal text-base truncate ">
             $2500
+            <span className="text-xs text-white/50">Inicia: 06/11/2023</span>
           </span>
         </div>
       </div>

@@ -12,7 +12,7 @@ function Stats() {
       <h1 className="text-3xl font-bold text-white uppercase text-center mt-12">
         Seteo y Estadisticas
       </h1>
-      <div className="grid pb-24 mt-12 place-items-center">
+      <div className="grid pb-24 place-items-center">
         <div className="self-center align-center grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 place-items-center gap-2 items-center">
           <CurrentEvent />
           <Admins
