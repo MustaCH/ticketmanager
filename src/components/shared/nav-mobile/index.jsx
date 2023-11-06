@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoStatsChart } from "react-icons/io5";
-import { GoChecklist } from "react-icons/go";
+import { GoChecklist, GoTasklist } from "react-icons/go";
 import { AiOutlineQrcode } from "react-icons/ai";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { NavLink, useLocation } from "react-router-dom";
@@ -48,6 +48,15 @@ function NavMobile() {
             }
           >
             <IoStatsChart />
+          </button>
+        </NavLink>
+        <NavLink to={"/tasks"}>
+          <button
+            className={
+              activePage === "/tasks" ? `text-red-600` : `text-gray-400`
+            }
+          >
+            <GoTasklist />
           </button>
         </NavLink>
         <div>

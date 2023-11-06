@@ -1,4 +1,4 @@
-import { Home, List, Stats } from "./components/screens/index";
+import { Home, List, Stats, TaskList } from "./components/screens/index";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { NavDesktop, NavMobile } from "./components/shared";
 import { useEffect, useState } from "react";
@@ -29,6 +29,7 @@ function App() {
             <Route path="/ticketmanager" element={<Home />} />
             <Route path="/guestList" element={<List />} />
             <Route path="/stats" element={<Stats />} />
+            <Route path="/tasks" element={<TaskList />} />
           </Routes>
         </Router>
       ) : (
