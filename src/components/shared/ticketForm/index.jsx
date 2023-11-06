@@ -95,6 +95,10 @@ function TicketForm({ date, location }) {
             type={"number"}
             onChange={handleGuestTickets}
           />
+          <p>
+            Valor de entrada:{" "}
+            <span className="text-red-500 font-semibold">Preventa</span>
+          </p>
           <div className="mt-8">
             <Button name={"Generar tickets"} onClick={handleCreateInvite} />
           </div>

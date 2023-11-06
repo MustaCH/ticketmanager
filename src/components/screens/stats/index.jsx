@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Admins,
-  CurrentEvent,
-  TicketValue,
-  TicketSell,
-} from "./components/index";
+import { Admins, CurrentEvent, TicketSell } from "./components/index";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { Button, Input } from "../../shared";
 
@@ -18,18 +13,17 @@ function Stats() {
         Seteo y Estadisticas
       </h1>
       <div className="grid pb-24 mt-12 place-items-center">
-        <div className="self-center align-center grid grid-cols-1 lg:grid-cols-4 place-items-center gap-2 items-center">
+        <div className="self-center align-center grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-2 place-items-center gap-2 items-center">
+          <CurrentEvent />
           <Admins
             editAdmin={() => setEditAdmin(true)}
             newAdmin={() => setNewAdmin(true)}
           />
-          <CurrentEvent />
-          <TicketValue />
           <TicketSell />
         </div>
         <dialog
           open={editAdmin}
-          className="absolute z-50 rounded-lg pb-8 pt-4 bg-neutral-900 text-white"
+          className="absolute z-50 rounded-lg pb-8 pt-4 bg-neutral-900 text-white drop-shadow-2xl"
         >
           <div className="flex justify-between items-center mb-4 px-4">
             <h2 className="text-xl font-semibold">Editar usuario:</h2>
@@ -42,8 +36,8 @@ function Stats() {
             <Input label="Nombre:" />
             <Input label="Usuario:" />
             <div className="flex gap-4 flex-row-reverse justify-center">
-              <Button name="Eliminar" />
-              <Button name="Guardar" customStyle={"bg-gray-500"} />
+              <Button name="Eliminar" customStyle={"bg-transparent"} />
+              <Button name="Guardar" />
             </div>
           </div>
         </dialog>
@@ -63,8 +57,8 @@ function Stats() {
             <Input label="Usuario:" />
             <Input label="Constraseña:" />
             <div className="flex gap-4 flex-row-reverse justify-center">
-              <Button name="Cancelar" />
-              <Button name="Guardar" customStyle={"bg-gray-500"} />
+              <Button name="Cancelar" customStyle={"bg-transparent"} />
+              <Button name="Guardar" />
             </div>
           </div>
         </dialog>

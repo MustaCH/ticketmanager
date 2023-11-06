@@ -116,7 +116,16 @@ export async function getAdminsData() {
   return adminsData;
 }
 
-export async function createEvent(date, location, link) {
+export async function createEvent(
+  date,
+  location,
+  link,
+  inversion,
+  presale,
+  presaleDate,
+  general,
+  generalDate
+) {
   try {
     const eventsRef = collection(db, "events");
     const mainEventRef = doc(eventsRef, "main-event");
@@ -125,6 +134,11 @@ export async function createEvent(date, location, link) {
       date: date,
       location: location,
       link: link,
+      inversion: inversion,
+      presale: presale,
+      presaleDate: presaleDate,
+      general: general,
+      genetalDate: generalDate,
     };
 
     await setDoc(mainEventRef, newEvent);

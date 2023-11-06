@@ -7,6 +7,11 @@ function Home() {
   const [eventDate, setEventDate] = useState("");
   const [eventLocation, setEventLocation] = useState("");
   const [paymentLink, setPaymentLink] = useState("");
+  const [inversion, setInversion] = useState("");
+  const [presale, setPresale] = useState("");
+  const [presaleDate, setPresaleDate] = useState("");
+  const [general, setGeneral] = useState("");
+  const [generalDate, setGeneralDate] = useState("");
   const [showEventForm, setShowEventForm] = useState(true);
   const [existingEvent, setExistingEvent] = useState(null);
 
@@ -28,12 +33,33 @@ function Home() {
     checkExistingEvent();
   }, []);
 
-  const handleEventCreation = async (date, location, link) => {
+  const handleEventCreation = async (
+    date,
+    location,
+    link,
+    inversion,
+    presale,
+    general
+  ) => {
     try {
-      await createEvent(date, location, link);
+      await createEvent(
+        date,
+        location,
+        link,
+        inversion,
+        presale,
+        presaleDate,
+        general,
+        generalDate
+      );
       setEventDate(date);
       setEventLocation(location);
       setPaymentLink(link);
+      setInversion(inversion);
+      setPresale(presale);
+      setPresaleDate(presaleDate);
+      setGeneral(general);
+      setGeneralDate(generalDate);
       setShowEventForm(false);
       window.location.reload();
     } catch (error) {
@@ -52,13 +78,13 @@ function Home() {
             </p>
           </div>
         ) : showEventForm ? (
-          <div className="flex flex-col w-1/2 self-center">
+          <div className="flex flex-col w-96 lg:w-1/2 self-center">
             <h1 className="text-2xl font-bold text-center mb-4">
               Crear evento:
             </h1>
             <div className="flex flex-col gap-4">
               <Input
-                label={"Fecha:"}
+                label={"Fecha del evento:"}
                 type={"date"}
                 onChange={(e) => setEventDate(e.target.value)}
               />
@@ -72,10 +98,53 @@ function Home() {
                 type={"text"}
                 onChange={(e) => setPaymentLink(e.target.value)}
               />
+              <Input
+                label={"Inversion"}
+                type={"text"}
+                onChange={(e) => setInversion(e.target.value)}
+              />
+              <div className="flex flex-col gap-1 lg:flex-row justify-between">
+                <Input
+                  label={"Valor entrada (Preventa):"}
+                  type={"number"}
+                  onChange={(e) => setPresale(e.target.value)}
+                  customStyle={"lg:w-96"}
+                />
+                <Input
+                  label={"Fecha finalización (Preventa):"}
+                  type={"date"}
+                  onChange={(e) => setPresaleDate(e.target.value)}
+                  customStyle={"lg:w-96"}
+                />
+              </div>
+              <div className="flex flex-col gap-1 lg:flex-row justify-between">
+                <Input
+                  label={"Valor entrada (General):"}
+                  type={"number"}
+                  onChange={(e) => setGeneral(e.target.value)}
+                  customStyle={"lg:w-96"}
+                />
+                <Input
+                  label={"Fecha inicio (General):"}
+                  type={"date"}
+                  onChange={(e) => setGeneralDate(e.target.value)}
+                  customStyle={"lg:w-96"}
+                />
+              </div>
+
               <Button
                 name={"Crear evento"}
                 onClick={() =>
-                  handleEventCreation(eventDate, eventLocation, paymentLink)
+                  handleEventCreation(
+                    eventDate,
+                    eventLocation,
+                    paymentLink,
+                    inversion,
+                    presale,
+                    presaleDate,
+                    general,
+                    generalDate
+                  )
                 }
               />
             </div>

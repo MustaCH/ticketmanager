@@ -61,6 +61,9 @@ function Search({ placeholder, data }) {
                 <p className="text-red-500 ">
                   Entradas: <span className="text-white">{value.tickets}</span>
                 </p>
+                <p className="text-red-500 ">
+                  Valor: <span className="text-white">Preventa</span>
+                </p>
               </div>
               <div>
                 <TbTrashXFilled
