@@ -180,3 +180,16 @@ export async function deleteEvent() {
     throw error;
   }
 }
+
+export async function editEvent(eventId, updatedProperties) {
+  try {
+    const eventRef = doc(db, "events", eventId);
+
+    await setDoc(eventRef, updatedProperties, { merge: true });
+
+    console.log("Propiedades del evento actualizadas correctamente");
+  } catch (error) {
+    console.error("Error al actualizar las propiedades del evento: ", error);
+    throw error;
+  }
+}

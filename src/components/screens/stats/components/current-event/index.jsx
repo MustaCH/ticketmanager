@@ -1,8 +1,99 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineEdit, AiOutlineCloseCircle } from "react-icons/ai";
-import { deleteAllGuests, deleteEvent } from "../../../../../database/firebase";
+import {
+  deleteAllGuests,
+  deleteEvent,
+  editEvent,
+  getEvent,
+} from "../../../../../database/firebase";
+import { Button, Input } from "../../../../shared";
 
 function CurrentEvent() {
+  const [existingEvent, setExistingEvent] = useState();
+  const [showInput, setShowInput] = useState("");
+  const [newDate, setNewDate] = useState();
+  const [newLocation, setNewLocation] = useState();
+  const [newLink, setNewLink] = useState();
+  const [newInversion, setNewInversion] = useState();
+  const [newTicket, setNewTicket] = useState();
+  const [ticketState, setNewTicketState] = useState();
+
+  useEffect(() => {
+    const currentEvent = async () => {
+      try {
+        const event = await getEvent();
+        if (event) {
+          setExistingEvent(event);
+        }
+      } catch (error) {
+        console.error("Error al verificar el evento existente: ", error);
+      }
+    };
+
+    currentEvent();
+  }, []);
+
+  const handleEditDate = () => {
+    const eventId = "main-event";
+
+    if (newDate) {
+      const updatedProperties = {
+        date: newDate,
+      };
+      editEvent(eventId, updatedProperties);
+    }
+    setShowInput(false);
+  };
+
+  const handleEditLocation = () => {
+    const eventId = "main-event";
+
+    if (newLocation) {
+      const updatedProperties = {
+        location: newLocation,
+      };
+      editEvent(eventId, updatedProperties);
+    }
+    setShowInput(false);
+  };
+
+  const handleEditLink = () => {
+    const eventId = "main-event";
+
+    if (newLink) {
+      const updatedProperties = {
+        link: newLink,
+      };
+      editEvent(eventId, updatedProperties);
+    }
+    setShowInput(false);
+  };
+
+  const handleEditInversion = () => {
+    const eventId = "main-event";
+
+    if (newInversion) {
+      const updatedProperties = {
+        inversion: newInversion,
+      };
+      editEvent(eventId, updatedProperties);
+    }
+    setShowInput(false);
+  };
+
+  const handleEditTicket = () => {
+    const eventId = "main-event";
+
+    if (newTicket && ticketState) {
+      const updatedProperties = {
+        ticket: newTicket,
+        currentTicket: ticketState,
+      };
+      editEvent(eventId, updatedProperties);
+    }
+    setShowInput(false);
+  };
+
   const handleEventDeletion = () => {
     const confirmFirstAlert = window.confirm(
       "¿Estás seguro de que deseas finalizar el evento?"
@@ -25,61 +116,245 @@ function CurrentEvent() {
           Evento actual
         </h2>
         <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
-          <p className="flex justify-between items-center">
-            Fecha:{" "}
-            <AiOutlineEdit className="text-gray-400 text-lg lg:text-2xl cursor-pointer" />
-          </p>
-          <span className="flex items-center justify-between font-normal text-base">
-            24/11/2023
-          </span>
+          {showInput === "date" ? (
+            <>
+              <Input
+                label={"Fecha:"}
+                type={"date"}
+                customStyle={"font-thin"}
+                onChange={(e) => setNewDate(e.target.value)}
+              />
+              <div className="flex justify-end">
+                <Button
+                  name={"Editar"}
+                  customStyle={"font-normal"}
+                  onClick={handleEditDate}
+                />
+                <Button
+                  name={"Cancelar"}
+                  customStyle={"bg-transparent font-normal"}
+                  onClick={() => {
+                    setShowInput(false);
+                  }}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              {" "}
+              <p className="flex justify-between items-center">
+                Fecha:{" "}
+                <AiOutlineEdit
+                  className="text-gray-400 text-lg lg:text-2xl cursor-pointer"
+                  onClick={() => {
+                    setShowInput("date");
+                  }}
+                />
+              </p>
+              <span className="flex items-center justify-between font-normal text-base">
+                {existingEvent?.date}
+              </span>
+            </>
+          )}
         </div>
         <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
-          <p className="flex justify-between items-center">
-            Locación:{" "}
-            <AiOutlineEdit className="text-gray-400 text-lg lg:text-2xl cursor-pointer" />
-          </p>
+          {showInput === "location" ? (
+            <>
+              <Input
+                label={"Locación:"}
+                type={"address"}
+                placeholder={existingEvent?.location}
+                customStyle={"font-thin"}
+                onChange={(e) => setNewLocation(e.target.value)}
+              />
+              <div className="flex justify-end">
+                <Button
+                  name={"Editar"}
+                  customStyle={"font-normal"}
+                  onClick={handleEditLocation}
+                />
+                <Button
+                  name={"Cancelar"}
+                  customStyle={"bg-transparent font-normal"}
+                  onClick={() => {
+                    setShowInput(false);
+                  }}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              {" "}
+              <p className="flex justify-between items-center">
+                Locación:{" "}
+                <AiOutlineEdit
+                  className="text-gray-400 text-lg lg:text-2xl cursor-pointer"
+                  onClick={() => {
+                    setShowInput("location");
+                  }}
+                />
+              </p>
+              <span className="flex items-center justify-between font-normal text-base">
+                {existingEvent?.location}
+              </span>{" "}
+            </>
+          )}
+        </div>
+        <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
+          {showInput === "link" ? (
+            <>
+              <Input
+                label={"Link de pago:"}
+                type={"text"}
+                placeholder={existingEvent?.link}
+                customStyle={"font-thin"}
+                onChange={(e) => setNewLink(e.target.value)}
+              />
+              <div className="flex justify-end">
+                <Button
+                  name={"Editar"}
+                  customStyle={"font-normal"}
+                  onClick={handleEditLink}
+                />
+                <Button
+                  name={"Cancelar"}
+                  customStyle={"bg-transparent font-normal"}
+                  onClick={() => {
+                    setShowInput(false);
+                  }}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              {" "}
+              <p className="flex justify-between items-center">
+                Link de pago:{" "}
+                <AiOutlineEdit
+                  className="text-gray-400 text-lg lg:text-2xl cursor-pointer"
+                  onClick={() => {
+                    setShowInput("link");
+                  }}
+                />
+              </p>
+              <span className="flex items-center justify-between font-normal text-base">
+                {existingEvent?.link}
+              </span>
+            </>
+          )}
+        </div>
+        <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
+          {showInput === "inversion" ? (
+            <>
+              <Input
+                label={"Monto invertido:"}
+                type={"text"}
+                placeholder={existingEvent?.inversion}
+                customStyle={"font-thin"}
+                onChange={(e) => setNewInversion(e.target.value)}
+              />
+              <div className="flex justify-end">
+                <Button
+                  name={"Editar"}
+                  customStyle={"font-normal"}
+                  onClick={handleEditInversion}
+                />
+                <Button
+                  name={"Cancelar"}
+                  customStyle={"bg-transparent font-normal"}
+                  onClick={() => {
+                    setShowInput(false);
+                  }}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              {" "}
+              <p className="flex justify-between items-center">
+                Monto invertido:{" "}
+                <AiOutlineEdit
+                  className="text-gray-400 text-lg lg:text-2xl cursor-pointer"
+                  onClick={() => {
+                    setShowInput("inversion");
+                  }}
+                />
+              </p>
+              <span className="flex items-center justify-between font-normal text-base">
+                ${existingEvent?.inversion}
+              </span>
+            </>
+          )}
+        </div>
+        <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
+          {showInput === "ticket" ? (
+            <>
+              <div className="flex items-center gap-8">
+                <Input
+                  label={"Valor de entrada:"}
+                  type={"text"}
+                  placeholder={existingEvent?.ticket}
+                  customStyle={"font-thin"}
+                  onChange={(e) => setNewTicket(e.target.value)}
+                />
+                <form className="flex gap-8">
+                  <Input
+                    type={"radio"}
+                    label={"Preventa"}
+                    value={"preventa"}
+                    checked={ticketState === "preventa"}
+                    onChange={() => setNewTicketState("preventa")}
+                  />
+                  <Input
+                    type={"radio"}
+                    label={"General"}
+                    value={"general"}
+                    checked={ticketState === "general"}
+                    onChange={() => setNewTicketState("general")}
+                  />
+                </form>
+              </div>
 
-          <span className="flex items-center justify-between font-normal text-base">
-            Niceto Vega 5198 - Miloca
-          </span>
-        </div>
-        <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
-          <p className="flex justify-between items-center">
-            Link de pago:{" "}
-            <AiOutlineEdit className="text-gray-400 text-lg lg:text-2xl cursor-pointer" />
-          </p>
-          <span className="flex items-center justify-between font-normal text-base truncate ">
-            https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js
-          </span>
-        </div>
-        <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
-          <p className="flex justify-between items-center">
-            Inversión:{" "}
-            <AiOutlineEdit className="text-gray-400 text-lg lg:text-2xl cursor-pointer" />
-          </p>
-          <span className="flex items-center justify-between font-normal text-base truncate ">
-            $120000
-          </span>
-        </div>
-        <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
-          <p className="flex justify-between items-center">
-            Valor de entrada: <span className="text-red-500">Preventa</span>{" "}
-            <AiOutlineEdit className="text-gray-400 text-lg lg:text-2xl cursor-pointer" />
-          </p>
-          <span className="flex items-center justify-between font-normal text-base truncate ">
-            $2000{" "}
-            <span className="text-xs text-white/50">Finaliza: 06/11/2023</span>
-          </span>
-        </div>
-        <div className="flex flex-col gap-2 my-4 text-white text-lg font-semibold">
-          <p className="flex justify-between items-center">
-            Valor de entrada: <span className="text-green-500">General</span>{" "}
-            <AiOutlineEdit className="text-gray-400 text-lg lg:text-2xl cursor-pointer" />
-          </p>
-          <span className="flex items-center justify-between font-normal text-base truncate ">
-            $2500
-            <span className="text-xs text-white/50">Inicia: 06/11/2023</span>
-          </span>
+              <div className="flex justify-end">
+                <Button
+                  name={"Editar"}
+                  customStyle={"font-normal"}
+                  onClick={handleEditTicket}
+                />
+                <Button
+                  name={"Cancelar"}
+                  customStyle={"bg-transparent font-normal"}
+                  onClick={() => {
+                    setShowInput(false);
+                  }}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="flex justify-between items-center">
+                Valor de entrada:
+                <span
+                  className={
+                    existingEvent?.currentTicket === "preventa"
+                      ? "text-red-500 capitalize"
+                      : "text-green-600 capitalize"
+                  }
+                >
+                  {existingEvent?.currentTicket}
+                </span>{" "}
+                <AiOutlineEdit
+                  className="text-gray-400 text-lg lg:text-2xl cursor-pointer"
+                  onClick={() => {
+                    setShowInput("ticket");
+                  }}
+                />
+              </p>
+              <span className="flex items-center justify-between font-normal text-base truncate ">
+                ${existingEvent?.ticket}
+              </span>
+            </>
+          )}
         </div>
       </div>
       <div

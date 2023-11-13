@@ -12,7 +12,7 @@ function Home() {
   const [presaleDate, setPresaleDate] = useState("");
   const [general, setGeneral] = useState("");
   const [generalDate, setGeneralDate] = useState("");
-  const [showEventForm, setShowEventForm] = useState(true);
+  const [showEventForm, setShowEventForm] = useState(false);
   const [existingEvent, setExistingEvent] = useState(null);
 
   useEffect(() => {
