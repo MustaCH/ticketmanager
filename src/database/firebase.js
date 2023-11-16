@@ -116,6 +116,42 @@ export async function getAdminsData() {
   return adminsData;
 }
 
+export async function createAdmin(newAdminData) {
+  const adminsCollection = collection(db, "admins");
+
+  try {
+    await addDoc(adminsCollection, newAdminData);
+    console.log("¡Nuevo administrador agregado con éxito!");
+  } catch (error) {
+    console.error("Error al agregar un nuevo administrador: ", error);
+    throw error;
+  }
+}
+
+export const editAnAdmin = async (adminId, updatedAdminData) => {
+  const adminRef = doc(db, "admins", adminId);
+
+  try {
+    await setDoc(adminRef, updatedAdminData, { merge: true });
+    console.log("¡Administrador editado con éxito!");
+  } catch (error) {
+    console.error("Error al editar el administrador:", error);
+    throw error;
+  }
+};
+
+export async function deleteAdmin(adminId) {
+  const adminDocRef = doc(db, "admins", adminId);
+
+  try {
+    await deleteDoc(adminDocRef);
+    console.log("¡Administrador eliminado con éxito!");
+  } catch (error) {
+    console.error("Error al eliminar el administrador: ", error);
+    throw error;
+  }
+}
+
 export async function createEvent(
   date,
   location,

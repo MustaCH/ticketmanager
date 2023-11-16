@@ -1,16 +1,32 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Input, Button, Ticket } from "../index";
 import * as htmlToImage from "html-to-image";
 import download from "downloadjs";
-import { handleStoreGuest } from "../../../database/firebase";
+import { getEvent, handleStoreGuest } from "../../../database/firebase";
 
 function TicketForm({ date, location }) {
+  const [existingEvent, setExistingEvent] = useState();
   const [name, setName] = useState("XXXXX");
   const [lastName, setLastName] = useState("");
   const [dni, setDni] = useState("XXXXX");
   const [email, setEmail] = useState("XXXXX");
   const [tickets, setTickets] = useState("XX");
   const ticketRef = useRef();
+
+  useEffect(() => {
+    const currentEvent = async () => {
+      try {
+        const event = await getEvent();
+        if (event) {
+          setExistingEvent(event);
+        }
+      } catch (error) {
+        console.error("Error al verificar el evento existente: ", error);
+      }
+    };
+
+    currentEvent();
+  }, []);
 
   const handleGuestName = (e) => {
     let value = e.target.value;
@@ -97,7 +113,9 @@ function TicketForm({ date, location }) {
           />
           <p>
             Valor de entrada:{" "}
-            <span className="text-red-500 font-semibold">Preventa</span>
+            <span className="text-red-500 font-semibold capitalize">
+              {existingEvent.currentTicket}
+            </span>
           </p>
           <div className="mt-8">
             <Button name={"Generar tickets"} onClick={handleCreateInvite} />

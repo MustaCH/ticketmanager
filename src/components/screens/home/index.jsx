@@ -125,7 +125,7 @@ function Home() {
                   customStyle={"lg:w-96"}
                 />
                 <Input
-                  label={"Fecha inicio (General):"}
+                  label={"Fecha inicio:"}
                   type={"date"}
                   onChange={(e) => setGeneralDate(e.target.value)}
                   customStyle={"lg:w-96"}
