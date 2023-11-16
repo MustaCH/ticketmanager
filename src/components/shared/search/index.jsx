@@ -62,7 +62,17 @@ function Search({ placeholder, data }) {
                   Entradas: <span className="text-white">{value.tickets}</span>
                 </p>
                 <p className="text-red-500 ">
-                  Valor: <span className="text-white">Preventa</span>
+                  Valor:{" "}
+                  <span className="text-white">${value.ticketValue}</span>
+                </p>
+                <p
+                  className={
+                    value.twone === true
+                      ? "inline text-green-500 font-semibold"
+                      : "hidden"
+                  }
+                >
+                  2x1
                 </p>
               </div>
               <div>

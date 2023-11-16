@@ -114,7 +114,7 @@ function TicketForm({ date, location }) {
           <p>
             Valor de entrada:{" "}
             <span className="text-red-500 font-semibold capitalize">
-              {existingEvent.currentTicket}
+              {existingEvent?.currentTicket}
             </span>
           </p>
           <div className="mt-8">
