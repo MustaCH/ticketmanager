@@ -32,6 +32,8 @@ export const handleStoreGuest = async ({
   email,
   tickets,
   date,
+  twone,
+  ticketValue,
 }) => {
   const clientsCollection = collection(db, "guests");
 
@@ -42,6 +44,8 @@ export const handleStoreGuest = async ({
     email,
     tickets,
     date,
+    twone,
+    ticketValue,
   };
 
   try {

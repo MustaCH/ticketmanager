@@ -11,6 +11,8 @@ function TicketForm({ date, location }) {
   const [dni, setDni] = useState("XXXXX");
   const [email, setEmail] = useState("XXXXX");
   const [tickets, setTickets] = useState("XX");
+  const [twone, setTwone] = useState(false);
+  const ticketValue = existingEvent?.ticket;
   const ticketRef = useRef();
 
   useEffect(() => {
@@ -53,8 +55,21 @@ function TicketForm({ date, location }) {
     setTickets(value);
   };
 
+  const handleTwone = (e) => {
+    setTwone(true);
+  };
+
   const handleCreateInvite = () => {
-    handleStoreGuest({ name, lastName, dni, email, tickets, date });
+    handleStoreGuest({
+      name,
+      lastName,
+      dni,
+      email,
+      tickets,
+      date,
+      twone,
+      ticketValue,
+    });
 
     for (let i = 0; i < tickets; i++) {
       htmlToImage
@@ -111,6 +126,15 @@ function TicketForm({ date, location }) {
             type={"number"}
             onChange={handleGuestTickets}
           />
+          <div className="flex items-center gap-4 text-xl">
+            <p>2x1</p>
+            <Input
+              name={"2x1"}
+              type={"checkbox"}
+              checked={twone}
+              onChange={handleTwone}
+            />
+          </div>
           <p>
             Valor de entrada:{" "}
             <span className="text-red-500 font-semibold capitalize">
