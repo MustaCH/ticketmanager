@@ -117,7 +117,7 @@ function Admins() {
   };
 
   return (
-    <section className="bg-neutral-900/30 backdrop-blur-xl rounded-lg w-96 h-80">
+    <section className="bg-neutral-900/30 backdrop-blur-xl rounded-lg w-96 h-96">
       <div className="px-6 pt-6">
         <h2 className="text-xl font-bold text-white text-center">
           Administradores

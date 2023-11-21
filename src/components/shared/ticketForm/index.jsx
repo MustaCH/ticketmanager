@@ -12,6 +12,7 @@ function TicketForm({ date, location }) {
   const [email, setEmail] = useState("XXXXX");
   const [tickets, setTickets] = useState("XX");
   const [twone, setTwone] = useState(false);
+  const ticketType = existingEvent?.currentTicket;
   const ticketValue = existingEvent?.ticket;
   const ticketRef = useRef();
 
@@ -69,6 +70,7 @@ function TicketForm({ date, location }) {
       date,
       twone,
       ticketValue,
+      ticketType,
     });
 
     for (let i = 0; i < tickets; i++) {

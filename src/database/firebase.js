@@ -34,6 +34,7 @@ export const handleStoreGuest = async ({
   date,
   twone,
   ticketValue,
+  ticketType,
 }) => {
   const clientsCollection = collection(db, "guests");
 
@@ -46,6 +47,7 @@ export const handleStoreGuest = async ({
     date,
     twone,
     ticketValue,
+    ticketType,
   };
 
   try {
@@ -66,6 +68,43 @@ export async function getGuests() {
     id: item.id,
   }));
   return guests;
+}
+
+export async function getGuestsData() {
+  const guestsRef = collection(db, "guests");
+  const guestsSnapshot = await getDocs(guestsRef);
+
+  let soldPresale = 0;
+  let soldGeneral = 0;
+  let sold2x1 = 0;
+
+  guestsSnapshot.forEach((guestDoc) => {
+    const guest = guestDoc.data();
+    const ticketsNumber = parseInt(guest.tickets);
+
+    if (!isNaN(ticketsNumber)) {
+      const ticketType = guest.ticketType;
+
+      if (ticketType === "presale") {
+        soldPresale += ticketsNumber;
+      } else if (ticketType === "general") {
+        soldGeneral += ticketsNumber;
+      }
+
+      if (guest.twone === true && ticketType !== "presale") {
+        sold2x1 += ticketsNumber;
+      }
+    }
+  });
+
+  let totalSold = soldPresale + soldGeneral + sold2x1;
+
+  return {
+    soldPresale,
+    soldGeneral,
+    sold2x1,
+    totalSold,
+  };
 }
 
 export const deleteGuest = async (guestId) => {

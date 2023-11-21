@@ -74,6 +74,7 @@ function Search({ placeholder, data }) {
                 >
                   2x1
                 </p>
+                <p className="capitalize text-white/50">{value.ticketType}</p>
               </div>
               <div>
                 <TbTrashXFilled
