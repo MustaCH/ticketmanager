@@ -73,7 +73,7 @@ export default function Bars({ ticketsData }) {
     labels: kinds,
     datasets: [
       {
-        barThickness: 30,
+        barThickness: 15,
         borderRadius: 20,
         borderSkipped: "none",
         data: data,

@@ -72,16 +72,14 @@ function TicketSell() {
   return (
     <section className="bg-neutral-900/30 backdrop-blur-xl rounded-lg w-96 h-96">
       <div className="flex flex-col gap-8 px-6 pt-6">
-        <h2 className="text-xl font-bold text-white text-center">
-          Entradas vendidas
-        </h2>
+        <h2 className="text-xl font-bold text-white text-center">Invitados:</h2>
         <div className="flex flex-col justify-center">
           <p className="text-white text-lg font-semibold">
-            Total vendido:{" "}
-            <span className="text-green-500">{totalTickets}</span> entradas
+            Total cargado:{" "}
+            <span className="text-green-500">{totalTickets}</span> invitados
           </p>
           <Bars ticketsData={ticketsData} />
-          <p className="text-white/80 text-lg font-semibold">
+          <p className="text-white/80 text-sm font-semibold">
             Recaudado: ${totalRevenue}
           </p>
         </div>

@@ -19,9 +19,19 @@ function List() {
   }, []);
 
   return (
-    <div className=" lg:ps-24 lg:pb-12 min-h-screen">
-      {" "}
-      <Search placeholder={"Buscar invitados"} data={guests} />
+    <div className="pb-24 lg:ps-24 lg:pb-12 min-h-screen">
+      <div className="flex flex-col">
+        <Search
+          placeholder={"Buscar entradas"}
+          data={guests}
+          searchName={"Lista de entradas"}
+        />
+        <Search
+          placeholder={"Buscar VIP"}
+          data={guests}
+          searchName={"Lista VIP"}
+        />
+      </div>
     </div>
   );
 }

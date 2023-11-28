@@ -3,7 +3,7 @@ import { RiSearchLine } from "react-icons/ri";
 import { TbTrashXFilled } from "react-icons/tb";
 import { deleteGuest } from "../../../database/firebase";
 
-function Search({ placeholder, data }) {
+function Search({ placeholder, data, searchName }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleFilter = (e) => {
@@ -15,7 +15,7 @@ function Search({ placeholder, data }) {
   };
 
   const handleDeleteGuest = (guestId) => {
-    console.log("Guest ID to delete: ", guestId); // Comprueba que el ID sea correcto
+    console.log("Guest ID to delete: ", guestId);
     if (window.confirm("¿Estás seguro que deseas eliminar al invitado?")) {
       deleteGuest(guestId);
     }
@@ -27,9 +27,9 @@ function Search({ placeholder, data }) {
   });
 
   return (
-    <section className="w-full flex flex-col items-center pb-24">
+    <section className="w-full flex flex-col items-center ">
       <h2 className="text-2xl text-white font-bold mb-8 mt-8 uppercase">
-        Lista de invitados
+        {searchName}
       </h2>
       <form className="relative w-full lg:w-1/2 group">
         <div className="w-full relative z-10">
@@ -42,13 +42,13 @@ function Search({ placeholder, data }) {
             className="bg-white w-full py-2 pl-10 pr-4 rounded-tr-lg rounded-tl-lg text-black outline-none border-2 border-transparent focus:border-red-500"
           />
         </div>
-        <ul className="flex flex-col rounded-bl-lg rounded-br-lg justify-start w-full z-50 bg-zinc-800 p-1 px-2 lg:p-5 shadow-2xl   overflow-auto">
+        <ul className="flex flex-col rounded-bl-lg rounded-br-lg justify-start w-full h-96 lg:h-72 z-50 bg-zinc-800 p-1 px-2 lg:p-5 shadow-2xl   overflow-auto">
           {filteredData.map((value, key) => (
             <div
               key={key}
               className="flex justify-between items-center px-6 py-4 gap-4 text-white p-1 lg:p-4 my-1 bg-zinc-900 border border-transparent rounded-lg hover:border-white  duration-150"
             >
-              <div className="flex flex-col lg:flex-row  gap-2 lg:gap-4">
+              <div className="flex flex-col gap-2 ">
                 <p className="text-red-500 capitalize ">
                   Nombre:{" "}
                   <span className="text-white">
@@ -56,7 +56,7 @@ function Search({ placeholder, data }) {
                   </span>
                 </p>
                 <p className="text-red-500 ">
-                  Email: <span className="text-white">{value.email}</span>
+                  DNI: <span className="text-white">{value.dni}</span>
                 </p>
                 <p className="text-red-500 ">
                   Entradas: <span className="text-white">{value.tickets}</span>

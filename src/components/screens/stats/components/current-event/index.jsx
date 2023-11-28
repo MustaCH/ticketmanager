@@ -247,7 +247,7 @@ function CurrentEvent() {
           {showInput === "inversion" ? (
             <>
               <Input
-                label={"Monto invertido:"}
+                label={"Inversión:"}
                 type={"text"}
                 placeholder={existingEvent?.inversion}
                 customStyle={"font-thin"}
@@ -272,7 +272,7 @@ function CurrentEvent() {
             <>
               {" "}
               <p className="flex justify-between items-center">
-                Monto invertido:{" "}
+                Inversión:{" "}
                 <AiOutlineEdit
                   className="text-gray-400 text-lg lg:text-2xl cursor-pointer"
                   onClick={() => {
@@ -333,7 +333,7 @@ function CurrentEvent() {
           ) : (
             <>
               <p className="flex justify-between items-center">
-                Valor de entrada:
+                Valor de entrada (actual):
                 <span
                   className={
                     existingEvent?.currentTicket === "preventa"
