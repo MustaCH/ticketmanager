@@ -58,8 +58,45 @@ export const handleStoreGuest = async ({
   }
 };
 
+export const handleStoreVip = async ({
+  name,
+  lastName,
+  dni,
+  tickets,
+  date,
+}) => {
+  const vipsCollection = collection(db, "vip-guests");
+
+  const vipData = {
+    name,
+    lastName,
+    dni,
+    tickets,
+    date,
+  };
+
+  try {
+    const docRef = await addDoc(vipsCollection, vipData);
+    console.log("Cliente almacenado con ID: ", docRef.id);
+  } catch (error) {
+    console.error("Error al almacenar el cliente: ", error);
+  }
+};
+
 export async function getGuests() {
   const guestsRef = collection(db, "guests");
+  let q;
+  q = query(guestsRef);
+  const snapshot = await getDocs(q);
+  const guests = snapshot.docs.map((item) => ({
+    ...item.data(),
+    id: item.id,
+  }));
+  return guests;
+}
+
+export async function getVips() {
+  const guestsRef = collection(db, "vip-guests");
   let q;
   q = query(guestsRef);
   const snapshot = await getDocs(q);

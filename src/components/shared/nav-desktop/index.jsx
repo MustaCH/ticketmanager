@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoStatsChart } from "react-icons/io5";
 import { IoMdQrScanner } from "react-icons/io";
 import { GoChecklist, GoTasklist } from "react-icons/go";
-import { AiOutlineQrcode } from "react-icons/ai";
+import { FaUserPlus } from "react-icons/fa";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { MdOutlineRequestQuote } from "react-icons/md";
 import { NavLink, useLocation } from "react-router-dom";
@@ -44,7 +44,7 @@ const NavDesktop = () => {
                   : "bg-neutral-900 text-red-600 hover:bg-red-600 hover:text-white duration-300"
               }`}
             >
-              <AiOutlineQrcode className="text-2xl" />
+              <FaUserPlus className="text-2xl" />
             </NavLink>
           </li>
           <li className="p-4 rounded-tl-xl rounded-bl-xl bg-neutral-800">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Input, TicketForm } from "../../shared";
+import { Button, Input, TicketForm, VipForm } from "../../shared";
 import { createEvent, getEvent } from "../../../database/firebase";
 
 function Home() {
@@ -157,8 +157,14 @@ function Home() {
             Ticket Manager
           </h2>
         </div>
-        <main className="flex flex-col-reverse gap-24 justify-evenly">
+        <main className="flex flex-col-reverse lg:flex-row gap-24 justify-evenly">
           <TicketForm
+            date={existingEvent ? existingEvent.date : eventData.date}
+            location={
+              existingEvent ? existingEvent.location : eventData.location
+            }
+          />
+          <VipForm
             date={existingEvent ? existingEvent.date : eventData.date}
             location={
               existingEvent ? existingEvent.location : eventData.location

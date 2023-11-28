@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { IoStatsChart } from "react-icons/io5";
 import { IoMdQrScanner } from "react-icons/io";
+import { FaUserPlus } from "react-icons/fa";
 import { GoChecklist, GoTasklist } from "react-icons/go";
-import { AiOutlineQrcode } from "react-icons/ai";
 import { MdOutlineRequestQuote } from "react-icons/md";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -23,7 +23,7 @@ function NavMobile() {
               activePage === "/ticketmanager" ? `text-red-600` : `text-gray-400`
             }
           >
-            <AiOutlineQrcode />
+            <FaUserPlus />
           </button>
         </NavLink>
         <NavLink to={"/scanner"}>

@@ -89,6 +89,9 @@ function TicketForm({ date, location }) {
     <section>
       <div className="text-gray-300 flex flex-col lg:flex-row-reverse justify-center w-full gap-8 lg:gap-24">
         <div className="flex flex-col items-start gap-4 ps-8 lg:ps-0">
+          <h2 className="text-2xl font-bold uppercase mb-8">
+            Generar entradas
+          </h2>
           <Input
             label={"Nombre"}
             labelFor={"firstname"}

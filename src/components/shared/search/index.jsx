@@ -28,7 +28,7 @@ function Search({ placeholder, data, searchName }) {
 
   return (
     <section className="w-full flex flex-col items-center ">
-      <h2 className="text-2xl text-white font-bold mb-8 mt-8 uppercase">
+      <h2 className="text-xl text-white font-bold mb-8 mt-8 uppercase">
         {searchName}
       </h2>
       <form className="relative w-full lg:w-1/2 group">
@@ -42,7 +42,7 @@ function Search({ placeholder, data, searchName }) {
             className="bg-white w-full py-2 pl-10 pr-4 rounded-tr-lg rounded-tl-lg text-black outline-none border-2 border-transparent focus:border-red-500"
           />
         </div>
-        <ul className="flex flex-col rounded-bl-lg rounded-br-lg justify-start w-full h-96 lg:h-72 z-50 bg-zinc-800 p-1 px-2 lg:p-5 shadow-2xl   overflow-auto">
+        <ul className="flex flex-col rounded-bl-lg rounded-br-lg justify-start w-full z-50 bg-zinc-800 p-1 px-2 lg:p-5 shadow-2xl   overflow-auto">
           {filteredData.map((value, key) => (
             <div
               key={key}
