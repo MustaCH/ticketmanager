@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { IoStatsChart } from "react-icons/io5";
-import { IoMdQrScanner } from "react-icons/io";
 import { GoChecklist, GoTasklist } from "react-icons/go";
 import { FaUserPlus } from "react-icons/fa";
 import { RiLogoutBoxLine } from "react-icons/ri";
@@ -47,18 +46,7 @@ const NavDesktop = () => {
               <FaUserPlus className="text-2xl" />
             </NavLink>
           </li>
-          <li className="p-4 rounded-tl-xl rounded-bl-xl bg-neutral-800">
-            <NavLink
-              to="/scanner"
-              className={` p-4 flex justify-center rounded-xl ${
-                activePage === "/scanner"
-                  ? "bg-red-600 text-white"
-                  : "bg-neutral-900 text-red-600 hover:bg-red-600 hover:text-white duration-300"
-              }`}
-            >
-              <IoMdQrScanner className="text-2xl" />
-            </NavLink>
-          </li>
+
           <li className="p-4 rounded-tl-xl rounded-bl-xl bg-neutral-800">
             <NavLink
               to="./guestList"
