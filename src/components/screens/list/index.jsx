@@ -66,6 +66,7 @@ function List() {
             placeholder={"Buscar VIP"}
             data={vips}
             searchName={"Lista VIP"}
+            showValue={false}
           />
         )}
       </div>

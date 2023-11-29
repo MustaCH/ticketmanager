@@ -3,8 +3,9 @@ import { RiSearchLine } from "react-icons/ri";
 import { TbTrashXFilled } from "react-icons/tb";
 import { deleteGuest } from "../../../database/firebase";
 
-function Search({ placeholder, data, searchName }) {
+function Search({ placeholder, data, searchName, showValue }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const showTicketValue = showValue;
 
   const handleFilter = (e) => {
     setSearchTerm(e.target.value.toLowerCase());
@@ -61,7 +62,11 @@ function Search({ placeholder, data, searchName }) {
                 <p className="text-red-500 ">
                   Entradas: <span className="text-white">{value.tickets}</span>
                 </p>
-                <p className="text-red-500 ">
+                <p
+                  className={
+                    showTicketValue === false ? "hidden" : "text-red-500 "
+                  }
+                >
                   Valor:{" "}
                   <span className="text-white">${value.ticketValue}</span>
                 </p>
