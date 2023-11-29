@@ -23,15 +23,17 @@ ChartJS.register(
   Filler
 );
 
-export default function Bars({ ticketsData }) {
+export default function Bars({ ticketsData, totalVips }) {
+  console.log("Total de VIPs:", totalVips);
   var data = [
     ticketsData.soldPresale,
     ticketsData.soldGeneral,
     ticketsData.sold2x1,
+    totalVips,
   ];
-  var kinds = ["Preventa", "General", "2x1"];
+  var kinds = ["Preventa", "General", "2x1", "VIPs"];
 
-  var total = ticketsData.totalSold;
+  var total = ticketsData.totalSold + totalVips;
 
   var options = {
     responsive: true,
@@ -50,6 +52,7 @@ export default function Bars({ ticketsData }) {
             "rgba(34, 197, 94, 1)",
             "rgba(239, 68, 68, 1)",
             "rgba(59, 130, 246, 1)",
+            "rgba(245, 158, 11, 1)",
           ],
         },
         grid: {
@@ -81,6 +84,7 @@ export default function Bars({ ticketsData }) {
           "rgba(34, 197, 94, 1)",
           "rgba(239, 68, 68, 1)",
           "rgba(59, 130, 246, 1)",
+          "rgba(245, 158, 11, 1)",
         ],
       },
     ],

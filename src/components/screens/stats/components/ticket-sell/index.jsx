@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { getGuests, getGuestsData } from "../../../../../database/firebase";
+import {
+  getGuests,
+  getVips,
+  getGuestsData,
+} from "../../../../../database/firebase";
 import Bars from "./barchart";
 
 function TicketSell() {
   const [totalTickets, setTotalTickets] = useState(0);
+  const [totalVips, setTotalVips] = useState(0);
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [ticketsData, setTicketsData] = useState({
     soldPresale: 0,
@@ -16,18 +21,23 @@ function TicketSell() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const guestsData = await getGuests();
+        const guests = await getGuests();
+        const vips = await getVips();
+        const allGuests = [...guests, ...vips];
 
+        let totalVipsNumber = 0;
         let ticketsSold = 0;
         let revenue = 0;
 
-        guestsData.forEach((guest) => {
+        allGuests.forEach((guest) => {
           const ticketsNumber = parseInt(guest.tickets);
 
           if (!isNaN(ticketsNumber)) {
             ticketsSold += ticketsNumber;
 
-            const ticketValue = parseFloat(guest.ticketValue);
+            const ticketValue = guest.ticketValue
+              ? parseFloat(guest.ticketValue)
+              : 0;
 
             if (!isNaN(ticketValue)) {
               if (guest.twone === true) {
@@ -46,6 +56,12 @@ function TicketSell() {
           }
         });
 
+        vips.forEach((vip) => {
+          const vipsNumber = parseInt(vip.tickets);
+          totalVipsNumber += vipsNumber;
+        });
+
+        setTotalVips(totalVipsNumber);
         setTotalTickets(ticketsSold);
         setTotalRevenue(revenue);
       } catch (error) {
@@ -78,7 +94,7 @@ function TicketSell() {
             Total cargado:{" "}
             <span className="text-green-500">{totalTickets}</span> invitados
           </p>
-          <Bars ticketsData={ticketsData} />
+          <Bars ticketsData={ticketsData} totalVips={totalVips} />
           <p className="text-white/80 text-sm font-semibold">
             Recaudado: ${totalRevenue}
           </p>

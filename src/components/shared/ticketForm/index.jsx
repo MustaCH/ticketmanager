@@ -131,15 +131,19 @@ function TicketForm({ date, location }) {
             type={"number"}
             onChange={handleGuestTickets}
           />
-          <div className="flex items-center gap-4 text-xl">
-            <p>2x1</p>
-            <Input
-              name={"2x1"}
-              type={"checkbox"}
-              checked={twone}
-              onChange={handleTwone}
-            />
-          </div>
+          {tickets > 1 ? (
+            <div className="flex items-center gap-4 text-xl">
+              <p>2x1</p>
+              <Input
+                name={"2x1"}
+                type={"checkbox"}
+                checked={twone}
+                onChange={handleTwone}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
           <p>
             Valor de entrada:{" "}
             <span className="text-red-500 font-semibold capitalize">

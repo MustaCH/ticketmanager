@@ -122,13 +122,13 @@ export async function getGuestsData() {
     if (!isNaN(ticketsNumber)) {
       const ticketType = guest.ticketType;
 
-      if (ticketType === "presale") {
+      if (ticketType === "preventa") {
         soldPresale += ticketsNumber;
       } else if (ticketType === "general") {
         soldGeneral += ticketsNumber;
       }
 
-      if (guest.twone === true && ticketType !== "presale") {
+      if (guest.twone === true && ticketType !== "preventa") {
         sold2x1 += ticketsNumber;
       }
     }

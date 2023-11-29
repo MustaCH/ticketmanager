@@ -1,6 +1,6 @@
 export { default as Ticket } from "./ticket/index";
 export { default as TicketForm } from "./ticketForm/index";
-export { default as VipForm } from "./vip-form/index";
+export { default as VipForm } from "./vipForm/index";
 export { default as Input } from "./input/index";
 export { default as Button } from "./button/index";
 export { default as Search } from "./search/index";
